@@ -1,0 +1,54 @@
+# FFMPEG使用
+
+## 编译
+
+1、添加x264
+
+[x264各个版本下载地址](https://download.videolan.org/pub/videolan/x264/snapshots/)
+
+    ffmpeg自带有h264解码，如果要添加编码功能，需要添加x264
+    
+    编译过程中可能会出现如下问题：
+       （1） 
+        libavcodec/libx264.c: In function 'x264_frame' :
+        libavcodec/libx264.c:282:9 error: 'x264_bit_depth' undeclared(first use in this function)  
+                     if(x264_bit_depth>8)     
+        
+        libavcodec/libx264.c: In function 'x264_init_static':
+        libavcodec/libx264.c:892.9 error: 'x264_bit_depth' undeclared(first use in this function)
+                     if(x264_bit_depth== 8)  
+                     
+        这个是用的x264库版本，ffmpeg不兼容。需要换对应版本的x264库
+        
+        
+## 使用
+
+## 开发注意项
+
+（1）在C++中使用ffmpeg时，当引入头文件时需要使用extern "C"{ }包括，否则会出现编译异常
+
+    例如：
+    error: undefined reference to 'av_register_all()'
+    error: undefined reference to 'avcodec_register_all()'
+    error: undefined reference to 'avformat_network_init()'
+    
+    包括使用如下：
+    extern "C" {
+    #include "libavcodec/avcodec.h"
+    #include "libavformat/avformat.h"
+    #include "libavutil/avutil.h"
+    #include "libswscale/swscale.h"
+    }
+    
+（2） A/libc: Fatal signal 4 (SIGILL), code 0, fault addr 0x46e2 in tid 18298 (oftVideoEncoder), pid 18146 (oding.coolvideo)
+  
+    由于在添加x264时出现了这个问题，一直以为是编译x264不正确导致的，因为SIGILL表示的是非法指令，所以耗费了大量时间多次编译x264。
+    然而却不是这个导致的。。。
+    
+    后来通过android studio打包编译信息查看相关的警告信息，发现有如下警告：
+    warning: control may reach end of non-void function [-Wreturn-type]
+    是因为初始化函数漏了添加返回值，编译器出了警告，但是编译没报错，而运行后就报SIGILL异常
+    
+    添加返回值后，就运行正确了。
+    
+    所以程序运行出错后，看看编译警告信息可能是个办法。。。

@@ -76,6 +76,6 @@ Image.Plane分析
     总结：
     
     PixelStride表示一个像素所占字节数
-    RowStride表示一行有多少个像素
+    RowStride表示一行有多少个字节数
     RowPadding表示一行有多少个无效的字节数 （并不是像素有关的字节，而是为了字节对齐所使用）
     

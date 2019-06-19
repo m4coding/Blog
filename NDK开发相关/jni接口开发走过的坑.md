@@ -74,3 +74,153 @@
             env = nullptr;
         }
     }
+    
+    
+2、System.loadLibrary多次加载同一so库时，JNI_Onload只会回调一次，也即如果使用相同的库名称多次调用此方法,则忽略第二次和后续调用
+
+    这个场景主要出现在一个so库，包含了多个对外使用的Java功能类，这个时候在每个java功能类内
+    static {
+        System.loadLibrary("multimedia");
+    }
+    静态代码块里面引入so，从而造成多次引入
+    
+    为了对每个java类进行动态注册，可以考虑在JNI_Onload方法内分别注册各个java类对应的jni接口
+    
+    可参考android源码   --> android_media_MediaPlayer.cpp
+    extern int register_android_media_ImageReader(JNIEnv *env);
+    extern int register_android_media_ImageWriter(JNIEnv *env);
+    extern int register_android_media_Crypto(JNIEnv *env);
+    extern int register_android_media_Drm(JNIEnv *env);
+    extern int register_android_media_Descrambler(JNIEnv *env);
+    extern int register_android_media_MediaCodec(JNIEnv *env);
+    extern int register_android_media_MediaExtractor(JNIEnv *env);
+    extern int register_android_media_MediaCodecList(JNIEnv *env);
+    extern int register_android_media_MediaHTTPConnection(JNIEnv *env);
+    extern int register_android_media_MediaMetadataRetriever(JNIEnv *env);
+    extern int register_android_media_MediaMuxer(JNIEnv *env);
+    extern int register_android_media_MediaRecorder(JNIEnv *env);
+    extern int register_android_media_MediaScanner(JNIEnv *env);
+    extern int register_android_media_MediaSync(JNIEnv *env);
+    extern int register_android_media_ResampleInputStream(JNIEnv *env);
+    extern int register_android_media_MediaProfiles(JNIEnv *env);
+    extern int register_android_mtp_MtpDatabase(JNIEnv *env);
+    extern int register_android_mtp_MtpDevice(JNIEnv *env);
+    extern int register_android_mtp_MtpServer(JNIEnv *env);
+    
+    jint JNI_OnLoad(JavaVM* vm, void* /* reserved */)
+    {
+        JNIEnv* env = NULL;
+        jint result = -1;
+    
+        if (vm->GetEnv((void**) &env, JNI_VERSION_1_4) != JNI_OK) {
+            ALOGE("ERROR: GetEnv failed\n");
+            goto bail;
+        }
+        assert(env != NULL);
+    
+        if (register_android_media_ImageWriter(env) != JNI_OK) {
+            ALOGE("ERROR: ImageWriter native registration failed");
+            goto bail;
+        }
+    
+        if (register_android_media_ImageReader(env) < 0) {
+            ALOGE("ERROR: ImageReader native registration failed");
+            goto bail;
+        }
+    
+        if (register_android_media_MediaPlayer(env) < 0) {
+            ALOGE("ERROR: MediaPlayer native registration failed\n");
+            goto bail;
+        }
+    
+        if (register_android_media_MediaRecorder(env) < 0) {
+            ALOGE("ERROR: MediaRecorder native registration failed\n");
+            goto bail;
+        }
+    
+        if (register_android_media_MediaScanner(env) < 0) {
+            ALOGE("ERROR: MediaScanner native registration failed\n");
+            goto bail;
+        }
+    
+        if (register_android_media_MediaMetadataRetriever(env) < 0) {
+            ALOGE("ERROR: MediaMetadataRetriever native registration failed\n");
+            goto bail;
+        }
+    
+        if (register_android_media_ResampleInputStream(env) < 0) {
+            ALOGE("ERROR: ResampleInputStream native registration failed\n");
+            goto bail;
+        }
+    
+        if (register_android_media_MediaProfiles(env) < 0) {
+            ALOGE("ERROR: MediaProfiles native registration failed");
+            goto bail;
+        }
+    
+        if (register_android_mtp_MtpDatabase(env) < 0) {
+            ALOGE("ERROR: MtpDatabase native registration failed");
+            goto bail;
+        }
+    
+        if (register_android_mtp_MtpDevice(env) < 0) {
+            ALOGE("ERROR: MtpDevice native registration failed");
+            goto bail;
+        }
+    
+        if (register_android_mtp_MtpServer(env) < 0) {
+            ALOGE("ERROR: MtpServer native registration failed");
+            goto bail;
+        }
+    
+        if (register_android_media_MediaCodec(env) < 0) {
+            ALOGE("ERROR: MediaCodec native registration failed");
+            goto bail;
+        }
+    
+        if (register_android_media_MediaSync(env) < 0) {
+            ALOGE("ERROR: MediaSync native registration failed");
+            goto bail;
+        }
+    
+        if (register_android_media_MediaExtractor(env) < 0) {
+            ALOGE("ERROR: MediaCodec native registration failed");
+            goto bail;
+        }
+    
+        if (register_android_media_MediaMuxer(env) < 0) {
+            ALOGE("ERROR: MediaMuxer native registration failed");
+            goto bail;
+        }
+    
+        if (register_android_media_MediaCodecList(env) < 0) {
+            ALOGE("ERROR: MediaCodec native registration failed");
+            goto bail;
+        }
+    
+        if (register_android_media_Crypto(env) < 0) {
+            ALOGE("ERROR: MediaCodec native registration failed");
+            goto bail;
+        }
+    
+        if (register_android_media_Drm(env) < 0) {
+            ALOGE("ERROR: MediaDrm native registration failed");
+            goto bail;
+        }
+    
+        if (register_android_media_Descrambler(env) < 0) {
+            ALOGE("ERROR: MediaDescrambler native registration failed");
+            goto bail;
+        }
+    
+        if (register_android_media_MediaHTTPConnection(env) < 0) {
+            ALOGE("ERROR: MediaHTTPConnection native registration failed");
+            goto bail;
+        }
+    
+        /* success -- return valid version number */
+        result = JNI_VERSION_1_4;
+    
+    bail:
+        return result;
+    }

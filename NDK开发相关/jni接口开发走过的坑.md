@@ -1,6 +1,6 @@
 # jni接口开发走过的坑
 
-1、多线程中使用JNIEnv*
+**1、多线程中使用JNIEnv**
 
     在C++多线程开发过程中，有时会需要回调java方法，需要用到JNIEnv*。。需要从哪里获取到它呢？
     由于JNIEnv*与线程有关，如果需要javaVm的AttachCurrentThread来获取才行，直接通过全局变量的方式
@@ -76,7 +76,7 @@
     }
     
     
-2、System.loadLibrary多次加载同一so库时，JNI_Onload只会回调一次，也即如果使用相同的库名称多次调用此方法,则忽略第二次和后续调用
+**2、System.loadLibrary多次加载同一so库时，JNI_Onload只会回调一次，也即如果使用相同的库名称多次调用此方法,则忽略第二次和后续调用**
 
     这个场景主要出现在一个so库，包含了多个对外使用的Java功能类，这个时候在每个java功能类内
     static {

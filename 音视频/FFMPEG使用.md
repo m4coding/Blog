@@ -25,6 +25,20 @@
 
 1、使用libyuv来代替ffmpeg的颜色空间转换，如RGB转YUV或YUV转RGB等，因为libyuv的转换效率比ffmpeg高
 
+2、使用ffmpeg进行muxer时，分配AVFormatContext使用avformat_alloc_output_context2方法
+
+     指定封装格式为mp4时-->
+        默认的视频编码器为：AV_CODEC_ID_H264
+        默认的音频编码器为：AV_CODEC_ID_AAC
+        
+     指定封装格式为avi时-->
+            默认的视频编码器为：AV_CODEC_ID_MPEG4
+            默认的音频编码器为：AV_CODEC_ID_MP3
+                
+     指定封装格式为flv时-->
+            默认的视频编码器为：AV_CODEC_ID_FLV1
+            默认的音频编码器为：AV_CODEC_ID_MP3
+
 ## 开发注意项
 
 （1）在C++中使用ffmpeg时，当引入头文件时需要使用extern "C"{ }包括，否则会出现编译异常

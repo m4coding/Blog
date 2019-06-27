@@ -224,3 +224,10 @@
     bail:
         return result;
     }
+    
+    
+**3、C层调用Java的方法是，要主要弄好类型转换，否则会出现值错乱**
+
+     转换 --> (jint)   (jlong)
+     env->CallVoidMethod(obj2, gMediaCodecBufferInfo.set, (jint) offset, (jint) size,
+                            (jlong) 0, (jint) flags, (jlong) pts, (jlong) dts, (jlong) duration);

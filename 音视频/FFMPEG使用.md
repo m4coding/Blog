@@ -24,6 +24,14 @@
 
     使用fdk_aac是因为性能比ffmpeg内置的aac性能好
         
+## 命令行使用
+
+     //播放裸的aac文件，-ar指定采样率  -ac指定通道数
+    ffplay -ar 44100 -ac 1 E:\test.aac  
+    
+    //播放pcm文件  -ar指定采样率  -ac指定通道数 -f 指定采样格式
+    ffplay -ar 44100 -ac 1 -f s16le E:\test.pcm
+    
 ## 使用
 
 1、使用libyuv来代替ffmpeg的颜色空间转换，如RGB转YUV或YUV转RGB等，因为libyuv的转换效率比ffmpeg高
@@ -76,3 +84,20 @@
  
     av_frame_get_buffer(frame, 8); 对齐为8，分配AVFframe正常，yuv420编码h264正常
     若对齐为32或0，就会编码异常，导致编码出来视频花屏，很奇怪。。。。
+    
+    对于音频，对齐为0，是可以的
+    
+  （4）aac编码时的注意点
+  
+    在ffmpeg3.4中，对于内置的aac的编码，pcm采样格式（sample_fmt）为AV_SAMPLE_FMT_S16的，是不支持的，需要
+    先通过swr_convert转换为AV_SAMPLE_FMT_FLTP,才能进行编码
+    
+    而第三方库fdk-aac支持的编码，是可以AV_SAMPLE_FMT_S16支持编码，不需要转换
+    
+    音频帧的概念：
+    
+        一个音频帧的大小由编码格式、通道数、采样位数决定的。
+        例如aac编码，一个音频帧包含1024个采样，若通道数为2，采样位数16位，那么一帧音频帧大小为：
+        1024 * 2 * （16/8） = 1024 * 2 * 2 = 4096个字节
+    
+        此时编码一帧音频帧，应该送4096个字节到ffmpeg编码器，如果送入过多，那么就会导致编码出来后的音频播放速度加快

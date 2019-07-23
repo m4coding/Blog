@@ -101,3 +101,43 @@
         1024 * 2 * （16/8） = 1024 * 2 * 2 = 4096个字节
     
         此时编码一帧音频帧，应该送4096个字节到ffmpeg编码器，如果送入过多，那么就会导致编码出来后的音频播放速度加快
+        
+   （5）x264编码时的注意点：
+   
+    为了提高编码速度，可以针对CodecContext中priv_data的各值进行设置。
+    例如：
+        av_opt_set(mCodecContext->priv_data, "preset", "ultrafast", 0);
+        av_opt_set(mCodecContext->priv_data, "tune", "zerolatency", 0);
+        av_opt_set(mCodecContext->priv_data, "profile", "baseline", 0);
+        
+        这些设置要在avcodec_open2之前设置才会有效果，否则无效，注意！！！！！
+        
+    preset参数：主要调节编码速度和质量的平衡
+        有ultrafast、superfast、veryfast、faster、fast、medium、slow、slower、veryslow、placebo这10个选项，从快到慢
+        
+    tune参数：主要配合视频类型和视觉优化的参数
+        film：  电影、真人类型，对视频的质量非常严格时使用该选项
+        animation：  动画，压缩的视频是动画片时使用该选项
+        grain：      颗粒物很重，该选项适用于颗粒感很重的视频      
+        stillimage：  静态图像，该选项主要用于静止画面比较多的视频    
+        psnr：      提高psnr，该选项编码出来的视频psnr比较高
+        ssim：      提高ssim，该选项编码出来的视频ssim比较高   
+        fastdecode： 快速解码，该选项有利于快速解码    
+        zerolatency：零延迟，用在需要非常低的延迟的情况下，比如电视电话会议的编码，视频直播
+        
+    profile参数：
+        baseline： 基本画质。支持I/P 帧，只支持无交错（Progressive）和CAVLC；
+        main：主流画质。提供I/P/B 帧，支持无交错（Progressive）和交错（Interlaced）， 也支持CAVLC 和CABAC 的支持；
+        high：高级画质。在main Profile 的基础上增加了8x8内部预测、自定义量化、 无损视频编码和更多的YUV 格式；
+        
+        通常情况下压缩比例来说，baseline< main < high，对于带宽比较局限的在线视频，可能会选择high，
+        但有些时候，做个小视频，希望所有的设备基本都能解码（有些低端设备或早期的设备只能解码 baseline），
+        那就牺牲文件大小吧，用baseline！
+        
+        “当然，压缩比例越高，编码时间也会增加的”
+        
+        使用范围：
+            baseline: 多应用于实时通信领域;
+            main: 多应用于流媒体领域;
+            high: 多应用于广电和存储领域;
+            

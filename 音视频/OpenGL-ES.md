@@ -87,20 +87,119 @@ OpenGL ES 即为OpenGl for Embedded System，是一个OpenGL的子集，专用�
         //第一个参数表示的是要绘制的形状，第二个参数表示的是从顶点数组哪个位置开始读取，第三个参数表示的是读入多少个顶点
         glDrawArrays(GL_TRIANGLE_FAN, 0, 6);
         
+        
+Texture（纹理）  用于绘制图片
+
+     1、创建纹理
+     
+        final int[] textureObjectIds = new int[1];
+        glGenTextures(1, textureObjectIds, 0);
+        if (textureObjectIds[0] == 0) { //创建异常
+            return;
+        }
+        int textureId = textureObjectIds[0];
+        
+     2、加载位图数据，并与纹理绑定
+     
+         final BitmapFactory.Options options = new BitmapFactory.Options();
+         final Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.texture, options);
+         
+         // 先绑定纹理，第一个参数表示按二维纹理处理，第二个参数表示的是要绑定的纹理Id
+         glBindTexture(GL_TEXTURE_2D, textureId); 
+         
+         //设置纹理过滤参数  用于放大或缩小后，还能清晰显示
+         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR); //设置缩小时的过滤
+         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR); //设置放大时的过滤
+         
+         // 将bitmap与纹理对应
+         texImage2D(GL_TEXTURE_2D, 0, bitmap, 0);
+         
+         // OpenGL会copy一份bitmap，所以这里直接回收掉就行
+         bitmap.recycle();
+         
+         glGenerateMipmap(GL_TEXTURE_2D); //产生MIP贴图
+         
+      3、创建纹理绘制所需的Shader
+      
+         类似于创建shader通用步骤
+         
+         Vertex Shader代码
+         
+            uniform mat4 u_Matrix; // 正交变换
+            
+            attribute vec4 a_Position; // 顶点坐标
+            attribute vec2 a_TextureCoordinates; // Texture坐标
+            
+            varying vec2 v_TextureCoordinates; // 透传给Fragment Shader
+            
+            void main()
+            {
+                v_TextureCoordinates = a_TextureCoordinates;
+                gl_Position = u_Matrix * a_Position;
+            
+            }
+            
+        Fragment Shader代码
+        
+            precision mediump float;
+            
+            uniform sampler2D u_TextureUnit; //实际的纹理数据
+            
+            varying vec2 v_TextureCoordinates;
+            
+            void main()
+            {
+                gl_FragColor = texture2D(u_TextureUnit, v_TextureCoordinates);
+            }
+            
+     4、填充顶点数据、纹理顶点数据
+     
+         mVertexBuffer.position(0);
+         glVertexAttribPointer(aPositionLocation, 2, GL_FLOAT, false, 0, mVertexBuffer);
+         glEnableVertexAttribArray(aPositionLocation);
+         mTextureBuffer.position(0);
+         glVertexAttribPointer(aTextureCoordinatesLocation, 2, GL_FLOAT, false, 0, mTextureBuffer);
+         glEnableVertexAttribArray(aTextureCoordinatesLocation);
+
+     5、绘制纹理
+     
+         glClear(GL_COLOR_BUFFER_BIT);
+         glDrawArrays(GL_TRIANGLE_FAN, 0, 6);
+         
 ### OpenGL ES坐标认知
     
-    在OpenGL的坐标里，范围为[-1,1]
+    （1）在OpenGL的坐标里，范围为[-1,1]
                 
-    [-1,1]------------[1,1]
-       |                 |
-       |                 |
-       -------[0,0]-------
-       |                 |
-       |                 |
-    [-1,-1]-----------[1,-1]
+        [-1,1]------------[1,1]
+           |                 |
+           |                 |
+           -------[0,0]-------
+           |                 |
+           |                 |
+        [-1,-1]-----------[1,-1]
+        
+        中间为原点
     
-    中间为原点
     
+    （2）纹理的以s、t两个维度来表示
+        
+         在纹理坐标里，范围为[0,1]
+                    
+            [1,0]-----s-------[1,1]
+              |                 |
+              |                 |
+              t                 t
+              |                 |
+              |                 |
+              |                 |
+            [0,0]------s------[0,1]
+            
+            左下角为原点
+            
+            
+     （3）图片坐标
+     
+        图片有坐标，左上角为原点，x轴向左，y轴向下
     
 ### GLSL  -- OpenGL Shader Language
 

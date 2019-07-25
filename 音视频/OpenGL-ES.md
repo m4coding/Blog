@@ -94,13 +94,12 @@ OpenGL ES 即为OpenGl for Embedded System，是一个OpenGL的子集，专用�
     [-1,1]------------[1,1]
        |                 |
        |                 |
- -------------[0,0]------------- 
+       -------[0,0]-------
        |                 |
        |                 |
     [-1,-1]-----------[1,-1]
     
     中间为原点
-    
     
     
 ### GLSL  -- OpenGL Shader Language
@@ -118,3 +117,13 @@ OpenGL ES 即为OpenGl for Embedded System，是一个OpenGL的子集，专用�
     {
         gl_FragColor = u_Color; //输出
     }
+    
+### 参考
+
+相关书籍：
+
+    OpenGL ES应用开发实践指南 Android卷
+    
+参考demo：
+
+[OpenGL-ES-2.0-for-Android](https://github.com/wxplus/OpenGL-ES-2.0-for-Android)

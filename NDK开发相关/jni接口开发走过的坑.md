@@ -231,3 +231,26 @@
      转换 --> (jint)   (jlong)
      env->CallVoidMethod(obj2, gMediaCodecBufferInfo.set, (jint) offset, (jint) size,
                             (jlong) 0, (jint) flags, (jlong) pts, (jlong) dts, (jlong) duration);
+               
+      例子2：    
+      回调的方法为(IIILjava/lang/Object;Ljava/lang/Object;)V    
+      int64_t arg1 = -1, arg2 = -1;    
+      env->CallVoidMethod(
+                     mObject,
+                     mPostMethodID,
+                     callbackId,
+                     arg1,
+                     arg2,
+                     obj,
+                     obj2);
+                     
+      这个调用就会报错，如果arg1和arg2值为0就不会报错。。。
+      所以最好的做法是调用之前，先强转一下与(IIILjava/lang/Object;Ljava/lang/Object;)V对应
+      env->CallVoidMethod(
+                           mObject,
+                           mPostMethodID,
+                           (jint) callbackId,
+                           (jint) arg1,
+                           (jint) arg2,
+                           obj,
+                           obj2);

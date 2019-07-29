@@ -223,6 +223,9 @@ Texture（纹理）  用于绘制图片
 
     OpenGL ES应用开发实践指南 Android卷
     
+[LearnOpenGL](https://learnopengl-cn.github.io/)    
+[OpenGL 图形库使用](https://www.jianshu.com/p/15a3c6bd3ad3)
+    
 参考demo：
 
 [OpenGL-ES-2.0-for-Android](https://github.com/wxplus/OpenGL-ES-2.0-for-Android)

@@ -72,6 +72,7 @@ Image.Plane分析
     实验过程中，配置的PixelFormat.RGBX_8888格式，会引起三星手机C7100系统崩溃重启，小米手机会提示
     java.lang.UnsupportedOperationException: The producer output buffer format 0x1 doesn't match the ImageReader's configured buffer format 0x2.
     
+    ImageFormat.YUV_420_888 小米手机不支持。。。 三星手机支持。。。
     
     总结：
     

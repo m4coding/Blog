@@ -85,6 +85,19 @@
     av_frame_get_buffer(frame, 8); 对齐为8，分配AVFframe正常，yuv420编码h264正常
     若对齐为32或0，就会编码异常，导致编码出来视频花屏，很奇怪。。。。
     
+    发现对齐为8后，720p视频编码没问题，但是换为其他的分辨率视频之后就还是会花屏。。android系统有这个问题，window和mac则没有这个问题
+    所以还是继续用旧版接口可靠点。。
+    
+    //创建一个AvFrame
+    mFrame = av_frame_alloc();
+    if (!mFrame) {
+        LOGE_TAG(LOG_TAG, "%s", "av_frame_alloc could not allocate video frame");
+        return -1;
+    }
+    int pictureInYUV420PSize = avpicture_get_size(mCodecContext->pix_fmt, mCodecContext->width, mCodecContext->height);
+    mPictureBuf = (uint8_t *) av_malloc(pictureInYUV420PSize);
+    avpicture_fill((AVPicture *) mFrame, mPictureBuf, mCodecContext->pix_fmt, mCodecContext->width, mCodecContext->height);
+    
     对于音频，对齐为0，是可以的
     
   （4）aac编码时的注意点

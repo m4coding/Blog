@@ -23,7 +23,33 @@
 2、添加fdk_aac库
 
     使用fdk_aac是因为性能比ffmpeg内置的aac性能好
+    
+    
+3、添加librtmp库
+
+    ffmpeg本身是自带rtmp功能的，但是功能并不强大，只支持rtmp协议，并不支持其变种协议，如：rtmpt,rtmpe,rtmpte和rtmps等。
+    所以考虑添加librtmp第三方库
         
+[librtmp库下载地址](https://rtmpdump.mplayerhq.hu/)
+
+    编译过程出现的问题：
+    （1）ERROR: librtmp not found using pkg-config
+        由于ffmpeg的configure在配置过程中是通过pkg-cofig查看librtmp的所以就出现这个错误
+        解决方法：（对于其他类库，也适用）
+        **第一种方法：**
+            将enabled librtmp    && require_pkg_config librtmp librtmp librtmp/rtmp.h RTMP_Socket这行注释掉
+        
+        **第二种方法：**
+            由于ndk的交叉编译工具链没有arm-linux-androideabi-pkg-config，所以需要引用系统本身的
+            
+             # 创建一个软引用，指向系统的pkg-config  (有些系统并没有安装pkg-config，需要安装)
+             ln -s /usr/bin/pkg-config  工具链所在目录/arm-linux-androideabi-pkg-config
+             # 更改权限
+             chmod 777 工具链所在目录/arm-linux-androideabi-pkg-config
+             
+             # 在编译脚本，添加librtmp库pkgconfig目录所在路径
+             export PKG_CONFIG_PATH=librtmp库的pkgconfig目录路径:$PKG_CONFIG_PATH
+    
 ## 命令行使用
 
      //播放裸的aac文件，-ar指定采样率  -ac指定通道数
@@ -31,6 +57,12 @@
     
     //播放pcm文件  -ar指定采样率  -ac指定通道数 -f 指定采样格式
     ffplay -ar 44100 -ac 1 -f s16le E:\test.pcm
+    
+    //推流
+    ffmpeg -re -i E:work\database\good-48656992.1.mp4 -c copy -f flv rtmp://192.168.2.117:1935/stream/example
+    
+    //docker 启动推流服务器
+    docker run -it -p 1935:1935 -p 8080:80 alfg/nginx-rtmp
     
 ## 使用
 
@@ -165,3 +197,12 @@
         在Android使用ImageReader时，发现其回调回来的image帧率比较慢，明显跟不上25帧的帧率,720p分辨率下帧率只为8帧左右，测试于三星手机（SM-C7100）
         
         用opengl构造输入源的情况下，在720p的情况下输入帧率也是只有8帧左右，测试于三星手机（SM-C7100）,在小米手机上帧率就更低了，只有4帧左右
+        
+  （7）RTMP推流时的优化
+  
+        1、10000000 微妙
+        FFmpeg推流延迟10秒问题记录 (https://blog.csdn.net/vanjoge/article/details/79545490)
+        2、
+        FFMPEG关于推流端降低延迟调节（一） https://blog.csdn.net/zhuweigangzwg/article/details/82223011
+        3、
+        弱网环境下的RTMP推流策略  https://blog.csdn.net/carryinfo/article/details/54237230

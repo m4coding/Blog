@@ -206,3 +206,9 @@
         FFMPEG关于推流端降低延迟调节（一） https://blog.csdn.net/zhuweigangzwg/article/details/82223011
         3、
         弱网环境下的RTMP推流策略  https://blog.csdn.net/carryinfo/article/details/54237230
+        
+        4、弱网推流优化
+       
+            android 弱网工具：QNET
+            (1)av_interleaved_write_frame在网络不好时，会卡住
+            (2)avio_open 会卡住

@@ -54,6 +54,51 @@
     2、查看nginx rtmp module的状态：
     由于alfg/nginx-rtmp配置了stat，所以可以查看其状态
     http://192.168.2.117:8080/stat  （指定8080端口，因为docker run运行时-p指定了8080:80）
+    
+    3、配置nginx-rtmp-monitoring，监控服务器状态
+        #clone 仓库
+        git clone https://github.com/fiftysoft/nginx-rtmp-monitoring.git
+        
+        # cd到nginx-rtmp-monitoring目录
+        cd nginx-rtmp-monitoring
+        
+        # docker 编译容器 
+        docker build -t nginx-rtmp-monitoring .
+        
+        # 运行容器  利用-v绑定自己定义的config.json
+        docker run -it --rm -p 9991:9991 -v E:\work\video_test\nginx\config.json:/usr/src/app/config.json  nginx-rtmp-monitoring
+        
+        config.json如下：             
+            {
+              "site_title":"RTMP Monitoring",
+              "http_server_port":9991,
+              "rtmp_server_refresh":3000,
+              "rtmp_server_timeout":15000,
+              "rtmp_server_url":"http://192.168.2.117:8080/stat",
+              "rtmp_server_stream_url":"rtmp://192.168.2.117:8080/stream/",
+              "rtmp_server_control_url":"http://192.168.2.117:8080/control",
+              "session_secret_key":"change_me_random",
+              "username":"admin",
+              "password":"123123",
+              "language":"en",
+              "template":"default",
+              "login_template":"login",
+              "version":"1.0.2"
+            }
+            
+        说明：
+        site_title 指定网页标题
+        http_server_port 绑定的服务器端口  docker run -p指定的
+        rtmp_server_refresh  多久时间刷新一次网页 单位：毫秒
+        rtmp_server_timeout  超时  单位：毫秒
+        rtmp_server_url  rtmp服务器地址  如果rtmp服务器也是用docker容器挂载的，需要注意端口问题
+        rtmp_server_stream_url  rtmp对应的live应用地址
+        rtmp_server_control_url  这个字段。。暂未知作用
+        username 指定登录账户
+        password 指定登录密码
+        
+        # 浏览器网页登录查看 
+        http://192.168.2.117:9991/
 
 ### 推流延迟
 

@@ -40,6 +40,21 @@
 
 [利用docker搭建RTMP直播流服务器实现直播](https://blog.csdn.net/lipei1220/article/details/80234281)
 
+[异常断网，推流端重连，提示“已经存在推流”的问题](http://www.yeegee.com/view/newsdetail?id=19)
+
+    github地址：https://github.com/alfg/docker-nginx-rtmp
+
+    以命令行的形式进入，注意是/bin/sh 而不是/bin/bash，因为 alfg/nginx-rtmp基于的linux系统是Alpine
+    docker run -it  alfg/nginx-rtmp /bin/sh  
+    
+    1、当需要修改nginx.conf配置时，对于docker可以采用外挂的方式，如
+    # 使用-v来指定替换alfg/nginx-rtmp系统中的/opt/nginx/nginx.conf
+    docker run -it -p 1935:1935 -p 8080:80 -v E:\work\video_test\nginx\nginx.conf:/opt/nginx/nginx.conf  --rm alfg/nginx-rtmp
+    
+    2、查看nginx rtmp module的状态：
+    由于alfg/nginx-rtmp配置了stat，所以可以查看其状态
+    http://192.168.2.117:8080/stat  （指定8080端口，因为docker run运行时-p指定了8080:80）
+
 ### 推流延迟
 
     10秒级延时hls， 秒级延时rtmp， 毫秒级延时p2p

@@ -105,3 +105,18 @@
     10秒级延时hls， 秒级延时rtmp， 毫秒级延时p2p
     
     一般市场上可用是rtmp 2-3秒左右
+    
+### 推流时延测试
+
+    1、使用ffplay播放来进行测试时延
+        由于播放器播放时一般会有缓存，ffplay播放后会有一定的延迟性，所以为了测试时延，减低播放器的影响，设置如下：
+        //probesize设置探针大小，这个用于获取视频相关内容的，大小需要灵活设置 （我在测试时设置的probesize为3072，如果设置为32，视频会侦探不了，只能侦探音频）
+        //probesize设置合适的话，也有利于快速打开播放页面 （也即是秒开）
+        //-sync ext使用外部时钟来进行同步音视频播放
+        ffplay -probesize 32 -sync ext rtmp://[server]/[application]/[stream]
+        
+        //第二种方法  不能秒开，但是可以播放时时延很低
+        ffplay  -fflags nobuffer -rtmp_buffer 0 -rtmp_live live  rtmp://[server]/[application]/[stream]
+        
+     2、对视频添加帧标记，从而对比测试
+        https://zhuanlan.zhihu.com/p/26800890   

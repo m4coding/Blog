@@ -212,3 +212,9 @@
             android 弱网工具：QNET
             (1)av_interleaved_write_frame在网络不好时，会卡住
             (2)avio_open 会卡住
+            
+   （8）RTMP推aac音频时，av_interleaved_write_frame返回0，但是服务器端并没有收到推流信息
+   
+        //http://cn.voidcc.com/question/p-yehozwgx-bnt.html
+        发现如果同时添加了video stream和audio stream，但是只write aac音频，这个时候av_interleaved_write_frame返回0，也不会写成功。。。
+        如果只添加了audio stream，那么write aac音频时，这个时候av_interleaved_write_frame返回0，会写入成功

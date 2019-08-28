@@ -50,6 +50,25 @@
              # 在编译脚本，添加librtmp库pkgconfig目录所在路径
              export PKG_CONFIG_PATH=librtmp库的pkgconfig目录路径:$PKG_CONFIG_PATH
     
+4、添加libfreetype库
+
+    为了使用drawtext滤镜，需要这个库
+    
+    编译过程中出现的问题：
+    （1）/system/bin/linker: No such file or directory  或 找不到C编译器（编译源码主机的）
+    发现编译过程中，freetype/objs/apinames命令会执行，而apinames却是要编译架构的执行文件，却在编译源码的主机上执行，所以就会报错
+    解决方法：（第一种方法）安装gcc编译工具（编译源码主机的）。。由于我用的是docker系统，并没有安装gcc工具，编译报错了。。
+    （第二种方法）编译脚本添加export CC_BUILD="/usr/bin/gcc"，为CC_BUILD指定gcc路径
+    
+    所以引发上面一系列问题的原因是编译源码主机系统没有安装gcc编译器导致的。。。
+    
+    --enable-libfontconfig  如果默认不开启，如果不开启这个选项drawtext时需要指定字体文件
+    --enable-libfribidi 这个选项用于字体变形
+    
+5、添加libfontconfig库
+
+    （1）编译这个库比较坑，是由于里面用了python访问网络内容，需要代理访问才能编译成功。。利用proxychains即可
+
 ## 命令行使用
 
      //播放裸的aac文件，-ar指定采样率  -ac指定通道数
@@ -81,6 +100,26 @@
      指定封装格式为flv时-->
             默认的视频编码器为：AV_CODEC_ID_FLV1
             默认的音频编码器为：AV_CODEC_ID_MP3
+            
+3、添加水印
+
+    1、文字水印可使用drawtext
+    例如：
+    drawtext=fontsize=30:fontfile=字体绝对路径:text='%{n}':x=20:y=20:fontcolor=0xFFFF00@0.5
+    
+        fontsize指定字体大小
+        fontfile指定字体文件路径
+        text指定要显示的文字  （也可以用textfile，用外部文件的内容来指定，不过这个项不能和text同时用）
+        x指定距离屏幕左方的像素值
+        y指定距离屏幕上方的像素值
+        fontcolor指定颜色值   @后面表示的是不透明度，值范围为0.0~1.0   0xFFFF00依次表示的是RGB的值
+    
+    2、图片水印可使用movie
+    movie=图片绝对路径,scale=223:50[watermask];[in][watermask] overlay=1:300[out]
+    
+        scale表示将图片宽缩放到223，高缩放到50 
+        [watermask]表示的是指定一个名称
+        overlay=1:300表示的是图片水印显示的位置，1表示的距离屏幕左方的像素值为1,300表示的是距离屏幕顶部的像素值为300
 
 ## 开发注意项
 

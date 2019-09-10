@@ -98,7 +98,10 @@
         在要使用的时候，需要先注册下才行 avcodec_register(&ff_h264_mediacodec_encoder);
         
         然后就可以，使用了。。。。
+            
+[Android平台MediaCodec避坑指北 ](https://github.com/Denislyl/MyTechBlog2/issues/6)
 
+    
 ## 命令行使用
 
      //播放裸的aac文件，-ar指定采样率  -ac指定通道数

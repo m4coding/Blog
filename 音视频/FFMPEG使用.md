@@ -69,6 +69,36 @@
 
     （1）编译这个库比较坑，是由于里面用了python访问网络内容，需要代理访问才能编译成功。。利用proxychains即可
 
+6、添加硬编码--android内嵌的MediaCodec
+
+    由于3.4版本的ffmpeg只支持MediaCodec解码，若要支持编码需要外部添加
+    
+    configure配置添加--target-os=android和--enable-jni，针对于android平台编译，同时添加jni支持
+    
+    代码添加:
+        //在JNI_OnLoad入口处设置javaVm
+        av_jni_set_java_vm(vm, nullptr);
+        
+        //定义AVCodec结构，注册MediaCodec相关的编码信息
+        static AVCodec ff_h264_mediacodec_encoder = {
+                .name           = MEDIA_CODEC_H264_ENCODER_NAME,
+                .long_name      = MEDIA_CODEC_H264_ENCODER_NAME,
+                .type           = AVMEDIA_TYPE_VIDEO,
+                .id             = AV_CODEC_ID_H264,
+                .priv_data_size   = sizeof(MediaCodecH264EncContext),
+                .init           = mediacodec_encode_init,
+                .encode2        = mediacodec_encode_encodeFrame,
+                .close          = mediacodec_encode_close,
+        };
+        
+        mediacodec_encode_init指定MediaCodec编码初始化函数入口
+        mediacodec_encode_encodeFrame指定MediaCodec编码函数入口
+        mediacodec_encode_close指定MediaCodec编码资源释放函数入口
+        
+        在要使用的时候，需要先注册下才行 avcodec_register(&ff_h264_mediacodec_encoder);
+        
+        然后就可以，使用了。。。。
+
 ## 命令行使用
 
      //播放裸的aac文件，-ar指定采样率  -ac指定通道数
@@ -79,6 +109,8 @@
     
     //推流
     ffmpeg -re -i E:work\database\good-48656992.1.mp4 -c copy -f flv rtmp://192.168.2.117:1935/stream/example
+    
+    ./ffmpeg -re -i /root/test.mp4 -c:v libx264 -c:a copy -vf "drawtext=text='hello':x=100:y=100:fontsize=24:fontcolor=yellow:shadowy=2" -f flv rtmp://192.168.2.117:1935/stream/example
     
     //docker 启动推流服务器
     docker run -it -p 1935:1935 -p 8080:80 alfg/nginx-rtmp

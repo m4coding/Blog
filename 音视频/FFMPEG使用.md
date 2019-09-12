@@ -101,7 +101,15 @@
             
 [Android平台MediaCodec避坑指北 ](https://github.com/Denislyl/MyTechBlog2/issues/6)
 
-    
+    MediaCodec编码有很大的兼容性，例如：
+        对于video/avc  h264视频编码 -->
+            在三星手机上支持格式COLOR_FormatYUV420Planar （yuv420p）、COLOR_FormatYUV420SemiPlanar (NV12)等格式的编码
+            而在红米note5手机上却不支持COLOR_FormatYUV420Planar （yuv420p），支持COLOR_FormatYUV420SemiPlanar (NV12)
+        
+         对于audio/mp4a-latm  aac音频编码 -->
+                在三星手机上支持格式Main、LC等profile的编码
+                而在红米note5手机上却不支持Main，支持LC等profile的编码
+        
 ## 命令行使用
 
      //播放裸的aac文件，-ar指定采样率  -ac指定通道数

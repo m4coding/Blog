@@ -38,4 +38,55 @@
  ![itellij-1](https://github.com/m4coding/Blog/blob/master/%E5%90%8E%E7%AB%AF%E7%9B%B8%E5%85%B3/pic/itellij-tomcat-1.png)
  ![itellij-2](https://github.com/m4coding/Blog/blob/master/%E5%90%8E%E7%AB%AF%E7%9B%B8%E5%85%B3/pic/itellij-tomcat-2.png)
  ![itellij-3](https://github.com/m4coding/Blog/blob/master/%E5%90%8E%E7%AB%AF%E7%9B%B8%E5%85%B3/pic/itellij-tomcat-3.png)
+
+
+#### 阿里云ubuntu系统配置tomcat
+
+    1、安装jdk
+
+        wget https://github.com/frekele/oracle-java/releases/download/8u201-b09/jdk-8u201-linux-x64.tar.gz
+        tar -zxvf jdk-8u201-linux-x64.tar.gz
+
+        vim /etc/profile
+
+        #配置对应的环境变量,添加在profile文件的最后
+        export JAVA_HOME=/opt/java/jdk1.8.0_201
+        export JRE_HOME=$JAVA_HOME/jre
+        export PATH=$PATH:$JAVA_HOME/bin
+        export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
+
+
+        #使环境变量生效
+        source /etc/profile
+
+    2、安装tomcat
+
+        wget http://mirrors.tuna.tsinghua.edu.cn/apache/tomcat/tomcat-8/v8.5.46/bin/apache-tomcat-8.5.46.tar.gz
+        tar -zxvf apache-tomcat-8.5.46.tar.gz
+
+        vim apache-tomcat-8.5.46.tar.gz/bin/startup.sh
+
+        #在startup.sh文件最后添加对应的环境变量
+        export CLASSPATH=$CLASSPATH:%JAVA_HOME/lib/tools.jar
+        export TOMCAT_HOME=/opt/tomcat/apache-tomcat-8.5.46/
+        export CATALINA_HOME=$TOMCAT_HOME
+        export PATH=$PATH:$TOMCAT_HOME/bin
+
+        #启动tomcat
+        sh ./startup.sh
+
+    3、阿里云添加安全组规则，开放8080端口
+
+    4、阿里云服务器ubuntu系统开放防火墙端口8080
+
+        #防火墙允许8080端口
+        ufw allow 8080
+
+        #查看防火墙状态，可以看到8080端口已被允许开放
+        ufw status
+
+    5、在浏览器上输入http://阿里云服务器ip地址:8080即可以看到tomcat首页
+
+
+
     

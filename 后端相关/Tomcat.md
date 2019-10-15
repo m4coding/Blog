@@ -33,12 +33,19 @@
     基于tomcat镜像
     
     
-#### itellij配置tomcat
+#### intellij配置tomcat
     
  ![itellij-1](https://github.com/m4coding/Blog/blob/master/%E5%90%8E%E7%AB%AF%E7%9B%B8%E5%85%B3/pic/itellij-tomcat-1.png)
  ![itellij-2](https://github.com/m4coding/Blog/blob/master/%E5%90%8E%E7%AB%AF%E7%9B%B8%E5%85%B3/pic/itellij-tomcat-2.png)
  ![itellij-3](https://github.com/m4coding/Blog/blob/master/%E5%90%8E%E7%AB%AF%E7%9B%B8%E5%85%B3/pic/itellij-tomcat-3.png)
 
+
+#### window平台下intellij显示tomcat log乱码问题
+
+    由于tomcat log默认输出的编码时是utf-8，所以输出中文时在window平台下显示会有乱码的情况出现
+    为了避免这些情况，在本地的tomcat服务器上进行修改/conf/logging.properties
+    将java.util.logging.ConsoleHandler.encoding = UTF-8修改
+    java.util.logging.ConsoleHandler.encoding = GBK即可
 
 #### 阿里云ubuntu系统配置tomcat
 

@@ -31,5 +31,27 @@
     继承于HttpServlet，创建了Servlet类后，还需要配置才可以使用
     在Servlet3.0之前版本配置：
         只能在web.xml文件配置。如：
-    
+        <servlet>
+                <!-- 自定义servlet名称，一般为类名-->
+                <servlet-name>LoginAction</servlet-name>
+                <!-- 指定Servlet类的路径-->
+                <servlet-class>com.m4coding.chatroom.servlet.LoginAction</servlet-class>
+            </servlet>
+
+            <servlet-mapping>
+                <!-- 这里要填<servlet>中的<servlet-name>值，保持一致-->
+                <servlet-name>LoginAction</servlet-name>
+                <!-- 表示访问路径http://localhost:8080/LoginAction  /是不能丢掉的，一定要写的-->
+                <url-pattern>/LoginAction</url-pattern>
+            </servlet-mapping>
+
     在Servlet3.0之后版本配置（包括3.0版本）：
+        支持web.xml配置时，同时又添加注解方式的支持：
+
+        @WebServlet("/LoginAction")
+        public class LoginAction extends HttpServlet {
+            @Override
+            protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+                super.doPost(req, resp);
+            }
+        }

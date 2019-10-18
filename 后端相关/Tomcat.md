@@ -95,5 +95,15 @@
     5、在浏览器上输入http://阿里云服务器ip地址:8080即可以看到tomcat首页
 
 
+#### mac平台IntelliJ配置好工程之后运行，tomcat log提示异常
+
+    org.apache.catalina.LifecycleException: Protocol handler initialization failed
+
+    Caused by: java.net.BindException: Address already in use
+
+    解决方法：https://blog.csdn.net/qq_30507287/article/details/80168023
+
+
+
 
     

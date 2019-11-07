@@ -90,3 +90,25 @@ JSP处理流程：
         pageContext	PageContext类的实例，提供对JSP页面所有对象以及命名空间的访问
         page	类似于Java类中的this关键字
         Exception	Exception类的对象，代表发生错误的JSP页面中对应的异常对象
+        
+#### XMLHttpRequest使用参数为中文乱码问题
+
+[XMLHttpRequest 传递中文 乱码](https://blog.csdn.net/javaee_sunny/article/details/53129635)
+
+[XMLHttpRequest对象解决中文乱码问题](https://blog.csdn.net/zzh920625/article/details/50468789)
+
+    使用js的encodeURI两次编码避免Servlet服务器接收参数中文乱码问题
+    
+#### dom4j 输出UTF-8 XML时中文乱码
+
+    OutputFormat format = OutputFormat.createPrettyPrint();   
+    format.setEncoding("utf-8");  
+    try {   
+        output = new XMLWriter(new FileOutputStream("entity.xml"), format);   
+        output.write(document);   
+        output.close();   
+    } catch (IOException e) {   
+        e.printStackTrace();   
+    } 
+    
+    使用FileOutputStream替换FileWriter，避免utf-8时中文写入乱码

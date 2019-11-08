@@ -104,6 +104,47 @@
     解决方法：https://blog.csdn.net/qq_30507287/article/details/80168023
 
 
+#### javaWeb部署到服务器
+
+    部署的步骤一般的流程是：
+    1、将项目打包成war文件
+    2、上传到远程服务器
+    3、备份数据库文件
+    4、将war文件移动到tomcat对应的webapps目录
+    5、重启tomcat
+    
+[【部署】JavaWeb 项目部署到服务器](https://www.jianshu.com/p/aa7e276118cc)
 
 
+#### nginx代理tomcat上的javaWeb应用
+
+    ps -ef |grep tomcat 用于查看tomcat是否运行
+
+    由于nginx.conf包含了/etc/nginx/conf.d/*.conf，所以在http块下的配置可以选择到conf.d目录下添加即可对应conf文件即可
+    
+    nginx -t 检查nginx.conf配置是否正确，可以在修改配置后重新加载服务器之前校验一下
+    
+    nginx -s reload 重新加载
+
+    例如聊天室JavaWeb项目代理配置：
+    在/etc/nginx/conf.d目录，创建tomcat.conf，写入如下信息：
+    server {
+       listen       80;
+       # 服务名称
+       server_name  nginx_tomcat;
+       location /ChatRoom {
+           # 指定实际代理的tomcat ChatRoom地址
+           proxy_pass http://localhost:8080/ChatRoom;
+           # 反向代理的超时时间
+           proxy_connect_timeout 10;
+           proxy_redirect default;
+    
+       }
+    }
+    
+    
+    有个问题。。在阿里云服务器配置tomcat服务器后，偶尔看进程是启动了，但是用浏览器访问还是不能。。。不知道是不是内存问题导致。。。
+    重启服务器后，再起tomcat就又可以了。。。
+    
+    
     

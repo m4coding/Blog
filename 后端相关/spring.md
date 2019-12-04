@@ -49,3 +49,22 @@ Spring安全性配置
     不管你使用哪一个密码转码器，都需要理解的一点是，“数据库中的密码是永远不会解码的”（正确的策略是不能反向解码）
     所采取的策略与之相反，用户在登录时输入的密码会按照相同的算法进行转码，然后再与数据库中已经转码过的密码进行对比
     这个对比是在PasswordEncoder的matches()方法中进行的。
+
+* Authentication鉴权
+
+    1、username和password被获得后封装到一个UsernamePasswordAuthenticationToken（Authentication接口的实例）的实例中
+    2、这个token被传递给AuthenticationManager进行验证
+    3、成功认证后AuthenticationManager将返回一个得到完整填充的Authentication实例
+    4、通过调用SecurityContextHolder.getContext().setAuthentication(...)，参数传递authentication对象，来建立安全上下文（security context）
+
+#### JSON WEB TOKEN （JWT）
+
+为解决以往session认证需要存储的问题
+
+结构：
+
+    1、header  头部信息，包含声明类型和加密算法
+    2、payload 载荷信息  存储一些有用信息，例如用户相关的信息或token本身的有效期
+    3、signature 签证信息 又三部分组合而成，header base64编码后加payload base64编码后 再加私钥结合header中声明的算法加密而成
+
+[什么是 JWT -- JSON WEB TOKEN](https://www.jianshu.com/p/576dbf44b2ae)

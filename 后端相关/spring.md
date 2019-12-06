@@ -57,6 +57,8 @@ Spring安全性配置
     3、成功认证后AuthenticationManager将返回一个得到完整填充的Authentication实例
     4、通过调用SecurityContextHolder.getContext().setAuthentication(...)，参数传递authentication对象，来建立安全上下文（security context）
 
+* 添加了spring security的简单配置后，如果不重写configure(HttpSecurity http)方法，运行起应用后默认会进入一个登陆页的，如果重写后可以通过formLogin()再次添加
+
 #### JSON WEB TOKEN （JWT）
 
 为解决以往session认证需要存储的问题
@@ -68,3 +70,54 @@ Spring安全性配置
     3、signature 签证信息 又三部分组合而成，header base64编码后加payload base64编码后 再加私钥结合header中声明的算法加密而成
 
 [什么是 JWT -- JSON WEB TOKEN](https://www.jianshu.com/p/576dbf44b2ae)
+
+#### CSRF
+
+跨站点请求伪造 （Cross-Site request forgery）
+
+[CSRF是什么](https://www.jianshu.com/p/e825e67fcf28)
+
+#### 日志相关
+
+日志输出一般使用的架构
+
+1、logback + slf4j
+
+    slf4j实现日志api，logback实现日志底层
+
+2、Commons Logging + Log4j
+
+    Commons Logging实现日志api，Log4j实现日志底层
+
+总体而言，logback的性能好于Log4j
+
+
+#### SpringBoot部署
+
+构建并运行springboot应用有多种方式：
+
+    1、在IDE中运行应用程序（如Spring ToolSuite或IntelliJ IDEA）
+    2、使用Maven的spring-boot：run或Gradle的bootRun，在命令行里运行
+    3、使用Maven或Gradle生成可运行的JAR文件，随后在命令行中运行
+    4、使用Spring Boot CLI在命令行中运行Groovy脚本
+    5、使用Spring Boot CLI来生成可运行的JAR文件，随后在命令行中运行
+
+
+#### 属性配置
+
+通过外部的属性文件application.properties或application.yml可以引入配置
+
+同时可以通过profile来指定测试环境与生产环境各自的profile配置
+
+
+#### MyBatis相关配置
+
+发现一个坑，如果使用MyBatis Generator生产了一次mapper xml文件，然后再次执行Generator时，原来的文件不会删除掉，而新生成的代码会添加在之前内容后面，这样就会造成编译异常。。。
+
+    例如：Cause: java.lang.IllegalArgumentException: Result Maps collection already contains value for com.m4coding.mallmbg.mbg.mapper.PmsProductMapper.BaseResultMap
+
+
+#### @Controller和@RestController的区别
+
+
+

@@ -59,6 +59,13 @@ Spring安全性配置
 
 * 添加了spring security的简单配置后，如果不重写configure(HttpSecurity http)方法，运行起应用后默认会进入一个登陆页的，如果重写后可以通过formLogin()再次添加
 
+
+* 错误处理
+
+    AuthenticationEntryPoint 用来解决匿名用户访问无权限资源时的异常  （未登录）
+    AccessDeniedHandler 用来解决认证过的用户访问无权限资源时的异常 （已登录）
+
+
 #### JSON WEB TOKEN （JWT）
 
 为解决以往session认证需要存储的问题
@@ -118,6 +125,29 @@ Spring安全性配置
 
 
 #### @Controller和@RestController的区别
+
+@RestController相当于是整合了@Controller和@ResponseBody
+
+方法参数如果指定了@ResponseBody，默认是接受json参数，可以通过@RequestMapping的consumes参数指定修改
+
+[Springboot @Controller和@RestController](https://blog.csdn.net/qq_37866486/article/details/90700557)
+
+
+#### @Valid加BindingResult，校验入参
+
+有些时候需要校验入参时，可以通过注解来在对应的bean字段指定判断条件，避免在Controller中一个一个的if判断处理
+
+如注解@NotEmpty，如果String字段为null或""，则会提示message信息
+
+[使用@Valid+BindingResult进行controller参数校验](https://blog.csdn.net/fu250/article/details/80247930)
+
+
+#### 接口版本管理
+
+目前接口版本管理有两种做法：
+
+    1、在url中加入版本号
+    2、在请求中加入版本号
 
 
 

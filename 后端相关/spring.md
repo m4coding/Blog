@@ -148,6 +148,25 @@ Spring安全性配置
 
     1、在url中加入版本号
     2、在请求中加入版本号
+    
+[spring boot中restfull api版本控制](https://blog.csdn.net/u013467442/article/details/89382501)
+
+
+添加对应的版本控制后，发现swagger ui出现404，找不到，是由于继承了WebMvcConfigurationSupport，影响到了。。。
+
+重新在WebMvcConfigurationSupport注册swagger ui的静态资源即可，可能是继承后冲掉原来swagger的配置
+
+    @Override
+    protected void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("swagger-ui.html")
+                .addResourceLocations("classpath:/META-INF/resources/");
+        registry.addResourceHandler("/webjars/**")
+                .addResourceLocations("classpath:/META-INF/resources/webjars/");
+    }    
+    
+然后在springboot Application上加上@EnableWebMvc即可
+
+[SpringBoot swagger-ui.html 配置类继承 WebMvcConfigurationSupport 类后 请求404](https://www.cnblogs.com/laotan/p/9324717.html)
 
 
 

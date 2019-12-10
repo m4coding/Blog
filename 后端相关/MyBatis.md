@@ -117,3 +117,11 @@ xml标签说明
                             4、columnOverride（0个或多个）
                             5、ignoreColumn（0个或多个）
                                 该标签可以用来屏蔽不需要生成的列，该标签可选，可以配置多个。
+
+
+## 一些坑
+
+1、关于insertSelective()返回值，如果插入成功则返回1，失败返回0；
+对于updateByPrimaryKeySelective()的返回值，成功更新几条返回则返回相应的条数，比如更新了3条，返回值为3，如果更新失败返回0。
+
+然后insertSelective插入成功后，获取键值是保存在对应Bean的字段中的。

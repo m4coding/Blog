@@ -125,3 +125,13 @@ xml标签说明
 对于updateByPrimaryKeySelective()的返回值，成功更新几条返回则返回相应的条数，比如更新了3条，返回值为3，如果更新失败返回0。
 
 然后insertSelective插入成功后，获取键值是保存在对应Bean的字段中的。
+
+
+2、使用生成代码插件时，重复编译生成代码，mapper.xml文件是直接追加原来文件后面的，而不是直接覆盖的问题处理
+
+[MyBatis Generator使用过程中踩过的一个坑](https://www.jianshu.com/p/65daea588077)
+
+
+3、Generator生成代码时，tinyint自动转换为byte的处理方法：可以继承JavaTypeResolverDefaultImpl重新设置为Integer即可
+
+[mybatis-generator代码生成（支持自定义类型转换）](https://blog.csdn.net/lichuangcsdn/article/details/80873737)

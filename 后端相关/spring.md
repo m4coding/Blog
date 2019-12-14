@@ -222,3 +222,5 @@ Spring自带的AOP只支持方法拦截，若需要方法之外的连接点拦�
     2、RANDOM_PORT — 提供一个真实的Servlet环境，也就是说会启动内置容器，然后使用的是随机端口
     3、DEFINED_PORT — 这个配置也是提供一个真实的Servlet环境，使用的配置文件中配置的端口，如果没有配置，默认是8080
     4、NONE  - 没有web环境的配置
+    
+[SpringBoot（五）SpringBoot的单元测试](https://segmentfault.com/a/1190000014731019?utm_source=tag-newest)

@@ -201,3 +201,24 @@ Spring提供了4种类型的AOP支持：
 Spring自带的AOP只支持方法拦截，若需要方法之外的连接点拦截功能，那么可以利用Aspect来补充AOP的功能
 
 为了使用切面，还使能配置@EnableAspectJAutoProxy，启用AspectJ自动代理  （springboot中不需要配置，如果引入了aop的依赖，会自动配置的）
+
+
+#### 单元测试
+
+@SpringRunner和@SpringJUnit4ClassRunner的区别：
+
+    @RunWith(SpringRunner.class)
+    @RunWith(SpringJUnit4ClassRunner.class)
+    
+    SpringRunner 继承了SpringJUnit4ClassRunner，没有扩展任何功能；使用前者，名字简短而已。。。
+    
+
+@SpringApplicationConfiguration已被@SpringBootTest替代，从1.4.0版本开始
+
+
+对于@SpingBootTest有四种webEnvironment：
+
+    1、MOCK —提供一个虚拟的Servlet环境，内置的Servlet容器并没有真实的启动
+    2、RANDOM_PORT — 提供一个真实的Servlet环境，也就是说会启动内置容器，然后使用的是随机端口
+    3、DEFINED_PORT — 这个配置也是提供一个真实的Servlet环境，使用的配置文件中配置的端口，如果没有配置，默认是8080
+    4、NONE  - 没有web环境的配置

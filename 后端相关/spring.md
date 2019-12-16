@@ -78,6 +78,12 @@ Spring安全性配置
 
 [什么是 JWT -- JSON WEB TOKEN](https://www.jianshu.com/p/576dbf44b2ae)
 
+当获取到token后，需要访问资源时，需要将token放在Header中，格式如下：
+
+    Authorization: Bearer <token>
+
+[JWT官网](https://jwt.io/introduction/)
+
 #### CSRF
 
 跨站点请求伪造 （Cross-Site request forgery）

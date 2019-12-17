@@ -118,6 +118,35 @@ xml标签说明
                             5、ignoreColumn（0个或多个）
                                 该标签可以用来屏蔽不需要生成的列，该标签可选，可以配置多个。
 
+## MyBatis插件相关开发
+
+    //实现拦截的几个方法说明
+    public interface Interceptor {
+
+      Object intercept(Invocation invocation) throws Throwable;
+
+      Object plugin(Object target);
+
+      void setProperties(Properties properties);
+
+    }
+
+    1、void setProperties(Properties properties);
+        此方法用于给插件传递配置参数的
+
+    2、Object plugin(Object target);
+        Plugin.wrap 方法会自动判断拦截器的签名和被拦截对象的接口是否匹配，只有匹配的情况下才会使用动态代理拦截目标对象，因此在上面的实现方法中不必做额外的逻辑判断。
+
+    3、Object intercept(Invocation invocation) throws Throwable;
+        具体的拦截操作在这个方法进行处理
+
+当配置多个拦截器时，MyBatis 会遍历所有拦截器，按顺序执行拦截器的 plugin 方法，被拦截的对象就会被层层代理。
+
+在执行拦截对象的方法时，会一层层地调用拦截器，拦截器通过invocation.proceed（）调用下一层的方法，直到真正的方法被执行。
+
+方法执行的结果会从最里面开始向外一层层返回，所以如果存在按顺序配置的A、B、C三个签名相同的拦截器，
+
+MyBaits会按照C＞B＞A＞target.proceed（）＞A＞B＞C的顺序执行。如果A、B、C签名不同，就会按照MyBatis拦截对象的逻辑执行。
 
 ## 一些坑
 
@@ -135,3 +164,13 @@ xml标签说明
 3、Generator生成代码时，tinyint自动转换为byte的处理方法：可以继承JavaTypeResolverDefaultImpl重新设置为Integer即可
 
 [mybatis-generator代码生成（支持自定义类型转换）](https://blog.csdn.net/lichuangcsdn/article/details/80873737)
+
+
+4、使用PageHelper插件时的一些坑：
+
+    （1） Page page = PageHelper.startPage(pageNum, pageSize);
+        page记录的是最接近的那次select的结果，也是有效于最近那次的
+
+     同时通过PageHelper.getLocalPage获取的page有时会为空的，因为被clear掉了。。
+
+     在使用PageHelper时，设置startPage、查询数据、转化为pageInfo必须是连贯的三步，中间不能有任何其他处理否则会导致结果不可预期

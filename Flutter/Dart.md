@@ -168,6 +168,9 @@
     };
     say('过年了');
 
+    匿名函数：
+    => expr 等同于{ return expr; }
+
 7、异步编程
 
     Future

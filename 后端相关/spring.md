@@ -104,6 +104,7 @@ Spring安全性配置
 
 总体而言，logback的性能好于Log4j
 
+[Springboot yml方式 日志配置](https://blog.csdn.net/woyaoyonghanzizhuce/article/details/82852426)
 
 #### SpringBoot部署
 

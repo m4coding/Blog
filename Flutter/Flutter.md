@@ -41,3 +41,36 @@
             assert appProject != null
             
             
+            
+2、通过android studio创建的flutter module，导入时出现的问题解决
+
+    由于android studio创建的flutter module，相关目录都是带.的，即表示是隐藏文件夹，如.android, .ios等目录
+    通过git版本管理时这些隐藏文件夹是不会版本管理到仓库的，这个时候如果从其他地方git clone导入工程，那么就会
+    提示不存在.android目录中的include_flutter.groovy文件。。
+    
+    为了重新生成这些隐藏目录，需要重新以project的方式导入这个flutter module以去生成隐藏目录 (导入方式是as的import project导入那个flutter module)
+    
+    生成后再到原生工程修改settings.gradle导入
+    如例子：
+    
+        setBinding(new Binding([gradle: this]))
+        evaluate(new File(
+          settingsDir,
+          'flutter_module/.android/include_flutter.groovy'
+        ))
+        rootProject.name='TestFlutterApplication'
+        
+        include ':flutter_module'
+        
+    最后app模块依赖模块即可
+        implementation project(path: ':flutter')
+
+
+## flutter的两种运行模式
+
+    1、以module的方式运行调试
+    
+    2、以一个工程的方式去打开module来进行调试
+    
+            
+            

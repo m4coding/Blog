@@ -13,6 +13,8 @@
 
 [一些flutter变动](https://juejin.im/post/5dc90f9a6fb9a04a7a05dc1e)
 
+[一张图理解Flutter中Dart与原生环境通信](https://blog.csdn.net/joye123/article/details/100562767)
+
 ## 一些命令使用
 
     flutter doctor 检测环境配置

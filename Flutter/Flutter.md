@@ -75,4 +75,10 @@
     2、以一个工程的方式去打开module来进行调试
     
             
+## flutter断点调试
+
+    通过as的Flutter Attach按钮或者命令行flutter attach来进行断点调试或者hot reload
+    
+    当没在flutter页面时，会一直提示Waiting for a connection from Flutter on XXX
+    进入到flutter页面时会done成功，若还是不成功，那么重新杀掉app再来一次就会成功了。。
             

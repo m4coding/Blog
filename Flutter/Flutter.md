@@ -81,4 +81,18 @@
     
     当没在flutter页面时，会一直提示Waiting for a connection from Flutter on XXX
     进入到flutter页面时会done成功，若还是不成功，那么重新杀掉app再来一次就会成功了。。
+    
+
+## flutter web开发
+
+    通过flutter channel可以看到相关的flutter渠道，默认渠道是stable稳定渠道下，由于1.9.1版本的sdk
+    稳定版还没有支持web，而在beta版本是支持的，所以需要切换到channel为beta时才能支持开发web
+    
+    flutter channel beta  即可以切换到beta渠道
+    
+    flutter config --enable-web  执行命令，打开web支持
+    
+    对于已有的flutter app工程，可以直接在其工程目录下执行flutter create . 即可生成web相关支持的目录
+    
+[Flutter for web 最新填坑](https://juejin.im/post/5d7de304e51d45620c1c5460#heading-0)
             

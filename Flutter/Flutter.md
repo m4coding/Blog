@@ -68,6 +68,10 @@
         implementation project(path: ':flutter')
 
 
+3、flutter默认是忽略状态栏的高度的
+
+[flutter入门之兼容Android和IOS的状态栏](https://blog.csdn.net/email_jade/article/details/85701437)
+
 ## flutter的两种运行模式
 
     1、以module的方式运行调试

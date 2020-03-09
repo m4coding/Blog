@@ -76,6 +76,10 @@
 
 [Flutter : ListView, GridView inside ScrollView](https://medium.com/flutterpub/flutter-listview-gridview-inside-scrollview-68b722ae89d4)
 
+5、
+
+[flutter GestureDetector的onTap事件无效，原因?](https://blog.csdn.net/qq_43245438/article/details/93657854)
+
 ## flutter的两种运行模式
 
     1、以module的方式运行调试

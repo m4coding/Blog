@@ -80,6 +80,12 @@
 
 [flutter GestureDetector的onTap事件无效，原因?](https://blog.csdn.net/qq_43245438/article/details/93657854)
 
+6、在CustomScrollView中使用StaggeredGridView 
+
+    StaggeredGridView用在CustomScrollView中，会报异常，应该使用SliverStaggeredGrid来代替实现瀑布流，但是有个问题，在SliverStaggeredGrid后面再放置其他GridView或者ListView会出现滚动异常。。。
+    将SliverStaggeredGrid放在最后面就不会有问题
+
+
 ## flutter的两种运行模式
 
     1、以module的方式运行调试

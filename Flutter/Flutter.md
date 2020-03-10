@@ -113,6 +113,10 @@
     
     对于已有的flutter app工程，可以直接在其工程目录下执行flutter create . 即可生成web相关支持的目录
     
+## 切换升级flutter
+
+    当需要切换flutter版本时，现在android studio setting中找到flutter选项，然后设置切换，删除掉.package文件，如果还不行就还要设置修改系统的flutter path命令路径
+    
 [Flutter for web 最新填坑](https://juejin.im/post/5d7de304e51d45620c1c5460#heading-0)
 
 

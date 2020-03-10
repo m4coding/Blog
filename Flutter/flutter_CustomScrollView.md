@@ -24,3 +24,8 @@ Sliver成员：
 
     StaggeredGridView用在CustomScrollView中，会报异常，应该使用SliverStaggeredGrid来代替实现瀑布流，但是有个问题，在SliverStaggeredGrid后面再放置其他GridView或者ListView会出现滚动异常。。。
     将SliverStaggeredGrid放在最后面就不会有问题
+    
+    
+2、TabBarView在CustomScrollView里面使用时，发现如果TabBarView里面是List等滚动的View，不能联动滚动，是个坑。。
+
+    这里可以使用extended_nested_scroll_view的第三方插件库

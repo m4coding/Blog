@@ -85,6 +85,7 @@
     StaggeredGridView用在CustomScrollView中，会报异常，应该使用SliverStaggeredGrid来代替实现瀑布流，但是有个问题，在SliverStaggeredGrid后面再放置其他GridView或者ListView会出现滚动异常。。。
     将SliverStaggeredGrid放在最后面就不会有问题
 
+7、为了使页面在PageView中初始化后，切换到其他页面，再切回来不重新初始化，可以使用AutomaticKeepAliveClientMixin
 
 ## flutter的两种运行模式
 

@@ -4,6 +4,8 @@
 
 [Flutter - Sliver Layout horizontal scroll inside Sliver List](https://stackoverflow.com/questions/52738034/flutter-sliver-layout-horizontal-scroll-inside-sliver-list)
 
+[Flutter 实现类似美团外卖店铺页面滑动效果](https://zhuanlan.zhihu.com/p/106197796)
+
 Sliver成员：
 
     1、SliverAppBar

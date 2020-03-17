@@ -118,6 +118,13 @@ xml标签说明
                             5、ignoreColumn（0个或多个）
                                 该标签可以用来屏蔽不需要生成的列，该标签可选，可以配置多个。
 
+
+## Example使用相关
+
+[mybatis中关于example类详解](https://zhuanlan.zhihu.com/p/42411540)
+
+随机查询： example.setOrderByClause(" RAND()"); //随机查询  类似于在sql语句后面加上order by RAND()
+
 ## MyBatis插件相关开发
 
     //实现拦截的几个方法说明

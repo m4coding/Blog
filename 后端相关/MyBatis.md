@@ -174,3 +174,7 @@ MyBaits会按照C＞B＞A＞target.proceed（）＞A＞B＞C的顺序执行。�
      同时通过PageHelper.getLocalPage获取的page有时会为空的，因为被clear掉了。。
 
      在使用PageHelper时，设置startPage、查询数据、转化为pageInfo必须是连贯的三步，中间不能有任何其他处理否则会导致结果不可预期
+     
+5、发现使用查找数据库字段为text类型会为null，需要使用selectByExampleWithBLOBs才行
+
+[selectByExampleWithBLOBs 和selectByExample 的区别](https://blog.csdn.net/make_a_great_effort/article/details/88239476)

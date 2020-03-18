@@ -117,6 +117,25 @@ Spring安全性配置
     5、使用Spring Boot CLI来生成可运行的JAR文件，随后在命令行中运行
 
 
+    从官方的说明中 打成jar部署是最好的方式
+    
+    通过maven install可以打成jar包
+    
+    对于多个模块的工程，打包时若提示找不到包（Could not find artifact），则说明子模块打包不成功
+    
+    不要添加
+       <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+      </plugin>
+      到工程的parent pom文件中，避免有些模块不是springboot应用模块时，会导致main class找不到的情况 （也可能会出现找不到类的情况）
+      仅在是springboot应用的模块pom文件中添加就可以 
+
+    maven install打包成jar包，默认会进行单元测试，可以选择跳过测试，避免测试代码有异常时导致不能打包成功
+    命令行方式跳过： mvn install -Dmaven.test.skip=true 
+    itellij方式跳过：在maven面板上，点击上面的“Toggle Skip Test Mode”为选中状态就设置为跳过模式
+    
+    
 #### 属性配置
 
 通过外部的属性文件application.properties或application.yml可以引入配置

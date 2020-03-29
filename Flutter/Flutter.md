@@ -119,6 +119,18 @@
     
 [Flutter for web 最新填坑](https://juejin.im/post/5d7de304e51d45620c1c5460#heading-0)
 
+## flutter下拉刷新
+
+[Flutter 下拉刷新花式玩法](https://juejin.im/post/5bebcc44f265da61682aedb8)
+
+[Flutter嵌套刷新填坑](http://blog.hacktons.cn/2019/11/25/refresh-with-nestscrollview/)
+
+
+## flutter json序列化与反序列化
+
+[Flutter Json自动反序列化](https://juejin.im/post/5b5f00e7e51d45190571172f)
+
+    注意要添加part部分，否则build_runner会生成异常，提示miss part部分
 ## Flutter插件开发
 
     buildscript {

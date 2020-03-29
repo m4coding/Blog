@@ -18,6 +18,8 @@ Sliver成员：
     8、SliverPadding
     9、SliverStaggeredGrid  （第三方库 用于实现瀑布流）
     
+[flutter_staggered_grid_view和瀑布流效果](https://juejin.im/post/5d849942518825491b72496f)
+    
 由于CustomeScrollView的子组件只能是Sliver系列，所以如果你想将一个普通组件塞进CustomScrollView，那么务必将该组件用SliverToBoxAdapter包裹。
     
 ## 注意

@@ -132,4 +132,7 @@
 
     注意要添加part部分，否则build_runner会生成异常，提示miss part部分
 
+## 页面之间传参和返回数据
+
+[Flutter页面跳转和传值传参，接收页面返回数据、以及解决返回（pop）页面时黑屏的问题](https://blog.csdn.net/yuzhiqiang_1993/article/details/89090742)
             

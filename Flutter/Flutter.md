@@ -131,6 +131,30 @@
 [Flutter Json自动反序列化](https://juejin.im/post/5b5f00e7e51d45190571172f)
 
     注意要添加part部分，否则build_runner会生成异常，提示miss part部分
+## Flutter插件开发
+
+    buildscript {
+        repositories {
+            google()
+            jcenter()
+        }
+    
+        dependencies {
+            classpath 'com.android.tools.build:gradle:3.3.2'
+        }
+    }
+    
+    引入aar包后，发现基于3.5.3版本的工具，在flutter工程编译后会有Manifest重复的异常，改用3.3.2就正常了。。
+    而直接打开example的android工程编译是没有问题的。。打开flutter工程有异常。  （example工程的gradle）
+    
+    * What went wrong:
+    Execution failed for task ':ysbang_flutter_plugin:mergeDebugJavaResource'.
+    > A failure occurred while executing com.android.build.gradle.internal.tasks.Workers$ActionFacade
+       > More than one file was found with OS independent path 'AndroidManifest.xml'
+       
+       
+    
+
 
 ## 页面之间传参和返回数据
 

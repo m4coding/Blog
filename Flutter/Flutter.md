@@ -131,6 +131,7 @@
 [Flutter Json自动反序列化](https://juejin.im/post/5b5f00e7e51d45190571172f)
 
     注意要添加part部分，否则build_runner会生成异常，提示miss part部分
+    
 ## Flutter插件开发
 
     buildscript {
@@ -153,10 +154,12 @@
        > More than one file was found with OS independent path 'AndroidManifest.xml'
        
        
-    
-
-
 ## 页面之间传参和返回数据
 
 [Flutter页面跳转和传值传参，接收页面返回数据、以及解决返回（pop）页面时黑屏的问题](https://blog.csdn.net/yuzhiqiang_1993/article/details/89090742)
+
+
+## 在Flutter的pubspec.yaml中依赖版本号之前的插入符号（^）是什么？
+
+[在Flutter的pubspec.yaml中依赖版本号之前的插入符号（^）是什么？](https://stackoom.com/question/3ckCd/%E5%9C%A8Flutter%E7%9A%84pubspec-yaml%E4%B8%AD%E4%BE%9D%E8%B5%96%E7%89%88%E6%9C%AC%E5%8F%B7%E4%B9%8B%E5%89%8D%E7%9A%84%E6%8F%92%E5%85%A5%E7%AC%A6%E5%8F%B7-%E6%98%AF%E4%BB%80%E4%B9%88)
             

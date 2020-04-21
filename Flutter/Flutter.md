@@ -167,3 +167,10 @@
 
 [Flutter踩坑：ListView布局报错，RenderFlex children have non-zero flex but incoming height constraints are...](https://blog.csdn.net/kaixuan_dashen/article/details/102308861)
 
+## Image.file和Image.asset的一些坑
+
+    Image.file对应加载本地图片，如手机存储上的文件 
+    Image.asset对应加载app包里面的资源图片
+    这里需要注意：v1.12.13+hotfix.5 版本的flutter，在android debug包时Image.asset可以加载本地图片。。。，Image.asset在android release包不可以加载本地图片
+    需要特别注意。。。。
+

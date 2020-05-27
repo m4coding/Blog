@@ -176,3 +176,31 @@
     这里需要注意：v1.12.13+hotfix.5 版本的flutter，在android debug包时Image.asset可以加载本地图片。。。，Image.asset在android release包不可以加载本地图片
     需要特别注意。。。。
 
+
+## 编译engine引擎代码
+
+[搭建Flutter Engine源码编译环境](http://gityuan.com/2019/08/03/flutter_engine_setup/)
+
+整个执行的命令流程：
+
+    ./flutter/tools/gn  --no-lto  --runtime-mode profile
+    ./flutter/tools/gn --android --runtime-mode profile
+
+    ninja -C out/host_profile -j 4 
+    ninja -C out/android_profile -j 4
+
+编译过程中遇到问题：
+
+1、_ld: reference to bitcode symbol '___gxx_personality_v0' which LTO has not compiled in '__gxx_personality_v0' for architecture x86_64
+
+./flutter/tools/gn --no-lto --runtime-mode=profile
+
+添加--no-lto编译选项即可
+
+[Flutter engine host release build fails on macos ](https://github.com/flutter/flutter/issues/57207)
+
+2、编译android的产物，需要配置java sdk，可以使用android studio里面自带的
+
+    export PATH=$PATH:/Applications/Android\ Studio.app/Contents/jre/jdk/Contents/Home/bin
+    export JAVA_HOME=/Applications/Android\ Studio.app/Contents/jre/jdk/Contents/Home
+

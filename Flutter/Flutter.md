@@ -181,13 +181,27 @@
 
 [搭建Flutter Engine源码编译环境](http://gityuan.com/2019/08/03/flutter_engine_setup/)
 
-整个执行的命令流程：
+整个执行的编译命令流程：
 
     ./flutter/tools/gn  --no-lto  --runtime-mode profile
     ./flutter/tools/gn --android --runtime-mode profile
 
     ninja -C out/host_profile -j 4 
     ninja -C out/android_profile -j 4
+
+
+代码流程调用梳理：
+
+    library_loader.cc
+        flutter_main.cc
+        platform_view_android.cc
+            platform_view_android_jni.cc
+                android_shell_holder.cc
+                     platform_view_android = std::make_unique<PlatformViewAndroid>();   
+    
+    java层
+       FlutterJNI.java                            
+
 
 编译过程中遇到问题：
 

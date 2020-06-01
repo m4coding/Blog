@@ -133,7 +133,38 @@
 [Flutter Json自动反序列化](https://juejin.im/post/5b5f00e7e51d45190571172f)
 
     注意要添加part部分，否则build_runner会生成异常，提示miss part部分
+
+自动生成FromJson和ToJson方法的一些问题解决：
+
+    当自定义的Bean的字段是另一个B Bean时，import B bean时的需要相对路径，如果使用绝对路径就会生成异常，导致运行的时候不能正确解析json
+    例子：
     
+    import '../b/B.dart'; //正确的导包
+    import 'package:test/b/B.dart'; //绝对路径导包，自动反序列化会异常。。。
+    ///包路径：a/A.dart
+    @JsonSerializable()
+    class A {
+        List<B> bList;
+    }
+    
+    ///包路径：b/B.dart
+    @JsonSerializable()
+    class B {
+        int num;
+    }
+
+    当使用import 'package:test/b/B.dart';导包时，app运行时会报
+    type 'List<dynamic>' is not a subtype of type 'List<B>'
+    异常。。。。。
+    
+    使用import '../b/B.dart'; 导包时，运行正确
+         生成的正确代码段
+        ..bList = (json['bList'] as List)
+        ?.map((e) => e == null
+            ? null
+            : B.fromJson(e as Map<String, dynamic>))
+        ?.toList();
+
 ## Flutter插件开发
 
     buildscript {

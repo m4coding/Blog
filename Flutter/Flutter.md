@@ -164,6 +164,8 @@
             ? null
             : B.fromJson(e as Map<String, dynamic>))
         ?.toList();
+    
+    如果只能使用绝对路径导包的话，那就只能使用@JsonKey的fromJson，指定解析方法来实现了。。。    
 
 ## Flutter插件开发
 

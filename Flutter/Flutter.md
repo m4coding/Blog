@@ -89,6 +89,8 @@
 
 8、使用android studio开发flutter时，忽然出现target of uri doesn't exist，编辑器出现一片红色。。。一些类表示找不到，但其实这个库之前都导入正确的，解决这个问题可以在命令行Terminal执行1、flutter clean, 2、flutter packages get，重新导入包，正确找到依赖
 
+9、对于GlobalKey用于获取当前的currentState是对应StatefulWidget才有的。。而StatelessWidget是获取为null，注意！！！！
+
 ## flutter的两种运行模式
 
     1、以module的方式运行调试

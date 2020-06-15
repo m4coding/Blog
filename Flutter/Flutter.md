@@ -91,6 +91,14 @@
 
 9、对于GlobalKey用于获取当前的currentState是对应StatefulWidget才有的。。而StatelessWidget是获取为null，注意！！！！
 
+10、导包问题。。
+
+import 'file:///E:/work/GoServer/happy_go_go_flutter/lib/component/home/page/category/home_page_child_category.dart';
+
+如通过file:///E:/。。。绝对方式导入，能编译成功运行，但是热重载会失效。。
+
+很疑惑，为啥这样导入，也能编译运行成功。。。一大坑。。。这样导入后使home_page_child_category热重载失效。。
+
 ## flutter的两种运行模式
 
     1、以module的方式运行调试

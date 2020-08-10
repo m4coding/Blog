@@ -134,6 +134,7 @@ Spring安全性配置
     maven install打包成jar包，默认会进行单元测试，可以选择跳过测试，避免测试代码有异常时导致不能打包成功
     命令行方式跳过： mvn install -Dmaven.test.skip=true 
     itellij方式跳过：在maven面板上，点击上面的“Toggle Skip Test Mode”为选中状态就设置为跳过模式
+    (Maven面板 -> Lifecycle -> install)
     
 [Nginx部署多个spring-boot项目(jar方式部署)](https://blog.csdn.net/u014174854/article/details/80464391)
     

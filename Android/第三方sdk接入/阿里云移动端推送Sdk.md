@@ -3,6 +3,8 @@
 
 ## 接入
 
+[阿里云移动推送官方文档](https://help.aliyun.com/product/30047.html?spm=a2c4g.11186623.6.540.1dd1228cXT4FCe)
+
 1、使用官方提供maven仓库接入即可
 
 2、在AndroidManifest中接入appKey，appSecret，当然也可以选择EMAS统一接入方式（基于gradle插件接入）

@@ -43,6 +43,11 @@
     android:value对应的值不要appid，如"appid=xxxx" demo的坑。。
 
 
+## 疑惑点
+
+1、很奇怪，使用AliyunMessageIntentService来代替MessageReceiver的方式，当应用存活时，控制台推送通知时，
+只会回调onNotificationReceivedInApp，手机系统的通知栏并不会显示收到的通知。。
+
 ## 注意项
 
 [Android 8.0以上设备接收不到推送通知](https://help.aliyun.com/knowledge_detail/67398.html)

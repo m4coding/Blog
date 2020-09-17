@@ -142,6 +142,6 @@
     </plugins>
     
     这个时候，可以下载到MyPlugin-1.0.0.zip插件包，但是安装时就会提示和服务的插件名称不匹配,
-    修改url="http://127.0.0.1:8080/MyPlugin-1.0.0.zip?"就正确了。。这样说明不能使用有认证信息的url。。。。。
+    修改url="http://127.0.0.1:8080/MyPlugin-1.0.0.zip"就正确了。。这样说明不能使用有认证信息的url。。。。。
     
 如何在as添加自定义插件仓库索引，可以参考[Custom plugin repositories](https://www.jetbrains.com/help/idea/managing-plugins.html#repos)   

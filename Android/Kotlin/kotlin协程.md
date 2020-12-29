@@ -1,15 +1,15 @@
 # kotlin协程
 
-  class ServerService : Service(), CoroutineScope {
+    class ServerService : Service(), CoroutineScope {
 
-      private val job = Job() //job主要用来控制协程的生命周期的状态的，有区分于SupervisorJob -> childCancelled
+        private val job = Job() //job主要用来控制协程的生命周期的状态的，有区分于SupervisorJob -> childCancelled
 
-      /**
-       * 重新定义coroutineContext,launcher时默认在Dispatchers.Default （即异步线程）
-       */
-      override val coroutineContext: CoroutineContext
-          get() = Dispatchers.Default + job
-  }
+        /**
+         * 重新定义coroutineContext,launcher时默认在Dispatchers.Default （即异步线程）
+         */
+        override val coroutineContext: CoroutineContext
+            get() = Dispatchers.Default + job
+    }
 
 ## 参考
 

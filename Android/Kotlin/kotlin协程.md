@@ -14,7 +14,7 @@
 
 ## 问题点
 
-1、有个问题，当在协程launch里面发生代码异常时，若导致了应用闪退，这个时候看到log，是看不到应用闪退的具体信息。。。可能通过CoroutineExceptionHandler来处理来捕捉异常
+1、有个问题，当在协程launch里面发生代码异常时，若导致了应用闪退，这个时候看到logcat的log，是看不到应用闪退的具体信息。。。可能通过CoroutineExceptionHandler来处理来捕捉异常
 
     val handler = CoroutineExceptionHandler { context, exception ->
         Log.e(TAG, "Caught $exception")
@@ -26,6 +26,8 @@
         }
         job.join()
     }
+
+还有一个方法可以看到异常，那就是使用UncaughtExceptionHandler，也就是Thread.setDefaultUncaughtExceptionHandler
 
 ## 参考
 

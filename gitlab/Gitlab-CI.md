@@ -20,6 +20,8 @@
     sudo gitlab-runner register
     然后输入对应的url和token
 
+3、每个工程中添加的.gitlab-ci.yml就是对应的处理配置文件
+
 ## 一些坑
 
 1、发现一些job被pending挂起，需要在gitlab对应的Runner中设置Indicates whether this runner can pick jobs without tags

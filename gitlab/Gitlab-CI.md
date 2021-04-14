@@ -26,6 +26,8 @@
 
 1、发现一些job被pending挂起，需要在gitlab对应的Runner中设置Indicates whether this runner can pick jobs without tags
 
+2、发现unregister有异常，可以考虑sudo vi /etc/gitlab-runner/config.toml试试
+
 ## 参考
 
 [Install GitLab Runner manually on GNU/Linux](https://docs.gitlab.com/runner/install/linux-manually.html)
@@ -37,3 +39,7 @@
 [使用GitLab实现CI/CD](https://zhuanlan.zhihu.com/p/136843588)
 
 [Gitlab-CI使用教程](https://juejin.cn/post/6844904045581172744)
+
+[JB的git之旅--.gitlab-ci.yml介绍](https://juejin.cn/post/6844903633998331918)
+
+[JB的测试之旅-使用gitlab ci获取提交记录](https://blog.csdn.net/weixin_34405354/article/details/87994400)

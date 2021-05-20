@@ -28,6 +28,12 @@
 
 2、发现unregister有异常，可以考虑sudo vi /etc/gitlab-runner/config.toml试试
 
+3、当job被pengding时，而对应runner却是在线的，可以考虑使用
+
+gitlab-runner restart # 重启服务
+
+gitlab-runner verify # 验证下注册的Runner
+
 ## 参考
 
 [Install GitLab Runner manually on GNU/Linux](https://docs.gitlab.com/runner/install/linux-manually.html)

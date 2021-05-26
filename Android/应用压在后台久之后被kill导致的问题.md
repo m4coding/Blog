@@ -14,3 +14,17 @@
 
 此时就可验证相关问题了
 
+## 解决Fragment久置后台，App被kill掉后，恢复的问题
+
+在FragmentActivity的onCreate添加
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+
+        if (savedInstanceState != null) {
+            savedInstanceState.putParcelable("android:support:fragments", null);//清空保存Fragment的状态数据,这个时候App被kill掉后，fragment不会走恢复流程
+        }
+
+        super.onCreate(savedInstanceState);
+   }
+

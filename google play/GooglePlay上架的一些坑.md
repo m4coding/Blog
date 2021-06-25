@@ -8,3 +8,6 @@
 如果启动了Play App Signing计划，需要换回原来的签名，补救方法  google play Console的设置->应用完整性->升级应用签名密钥
 
 [Android Google Play app signing 最终完美解决方式](vhttps://www.cnblogs.com/zhaoyanjun/p/12715125.html)
+
+
+2、Google Play Console选项中的App Bundle探索器可以查看和下载已上传的apk

@@ -7,3 +7,34 @@
 刷新缓存命令：
 
     gradlew build --refresh-dependencies
+
+
+## .gradlew目录中添加init.gradle，解决库下载问题
+
+例子：
+
+    allprojects{
+        repositories {
+            def ALIYUN_REPOSITORY_URL = 'https://maven.aliyun.com/repository/public'
+            def ALIYUN_JCENTER_URL = 'https://maven.aliyun.com/repository/public'
+            all { ArtifactRepository repo ->
+                if(repo instanceof MavenArtifactRepository){
+                    def url = repo.url.toString()
+                    if (url.startsWith('https://repo1.maven.org/maven2')) {
+                        project.logger.lifecycle "Repository ${repo.url} replaced by $ALIYUN_REPOSITORY_URL."
+                        remove repo
+                    }
+                    if (url.startsWith('https://jcenter.bintray.com/')) {
+                        project.logger.lifecycle "Repository ${repo.url} replaced by $ALIYUN_JCENTER_URL."
+                        remove repo
+                    }
+                }
+            }
+            maven {
+                url ALIYUN_REPOSITORY_URL
+                url ALIYUN_JCENTER_URL
+            }
+        }
+    }
+
+[阿里云云效 Maven ](https://maven.aliyun.com/mvn/guide)

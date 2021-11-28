@@ -11,3 +11,13 @@
 
 
 2、Google Play Console选项中的App Bundle探索器可以查看和下载已上传的apk
+
+3、android app bundle的一些坑
+
+    （1）如果业务中利用到了so的路径，并进行对应的复制，那么会有个坑，之前的apk包是会将so解压好放在/data/app/app包名-数字的目录下的
+        而aab合成的apk是不会解压生成的，会直接压缩放到/data/app/app包名-数字/split_config.arm64_v8a.apk中，此时是不能直接取的。。
+        解决方法是在gradle.properties文件中添加android.bundle.enableUncompressedNativeLibs=false，关闭这个配置即可
+
+## 参考
+
+[Google Play crash logs not symbolicated with Android App Bundle](https://stackoverflow.com/questions/55966582/google-play-crash-logs-not-symbolicated-with-android-app-bundle#)

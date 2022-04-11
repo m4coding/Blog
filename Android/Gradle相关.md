@@ -38,3 +38,7 @@
     }
 
 [阿里云云效 Maven ](https://maven.aliyun.com/mvn/guide)
+
+## 看懂编译注解annotationProcessor和kapt
+
+[看懂编译注解annotationProcessor和kapt](https://www.jianshu.com/p/472e66632ed0)

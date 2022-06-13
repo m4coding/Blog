@@ -7,3 +7,7 @@
 2、kotlin 断电调试过程中出现'this@ActivityName' is not captured error Android/Kotlin 问题解决
 
 ['this@ActivityName' is not captured error Android/Kotlin](https://stackoverflow.com/questions/67873951/thisactivityname-is-not-captured-error-android-kotlin)
+
+3、升级android studio 3.6.2后 Build Output显示乱码问题
+
+[升级android studio 3.6.2后 Build Output显示乱码问题](https://www.jianshu.com/p/4618501b4cc6)

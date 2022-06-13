@@ -26,4 +26,6 @@
 
 
 
+## 系统安装软件检测
 
+[Android禁止读取已安装列表后获取是否安装某应用的方法](https://www.jianshu.com/p/ee50b3e3bfc7)

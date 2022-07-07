@@ -42,3 +42,7 @@
 ## 看懂编译注解annotationProcessor和kapt
 
 [看懂编译注解annotationProcessor和kapt](https://www.jianshu.com/p/472e66632ed0)
+
+## release打包混淆后，导致一些模型的private变量变为了public变量
+
+[Android打包aar后private可见性变public的问题及解决](https://blog.csdn.net/wmadao11/article/details/102613078)

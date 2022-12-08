@@ -6,13 +6,13 @@
 
 .ssh/config文件配置
 
-  Host github.com
-  User git
-  Hostname ssh.github.com
-  PreferredAuthentications publickey
-  IdentityFile ~/.ssh/id_rsa
-  Port 22
-  ProxyCommand connect -S 127.0.0.1:7890 %h %p
+    Host github.com
+    User git
+    Hostname ssh.github.com
+    PreferredAuthentications publickey
+    IdentityFile ~/.ssh/id_rsa
+    Port 22
+    ProxyCommand connect -S 127.0.0.1:7890 %h %p
 
 ## 参考
 

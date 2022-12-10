@@ -13,6 +13,15 @@
     IdentityFile ~/.ssh/id_rsa
     Port 22
     ProxyCommand connect -S 127.0.0.1:7890 %h %p
+    
+    macox上的配置
+    # github
+    Host github.com
+    HostName ssh.github.com
+    PreferredAuthentications publickey
+    IdentityFile ~/.ssh/id_rsa_github
+    Port 22
+    ProxyCommand nc -v -x  127.0.0.1:1080 %h %p
 
 ## 参考
 

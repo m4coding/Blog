@@ -29,4 +29,10 @@
     （2）从Admod网站中复制信息，然后复制生成app-ads.txt文件
     （3）在自己的网站的根目录上传app-ads.txt（通过firebase deploy --only hosting 进行部署），例如我的网站为https://test.com, 那么对应app-ads.txt下载地址应该为https://test.com/app-ads.txt
     （4）配置好文件后，Admod就会拉取https://test.com/app-ads.txt文件进行认证
+    
+## PIN未输入验证，导致广告投放暂停
+
+由于付款地址未正确，所以PIN码未能正常发出，超过一定时候后未验证PIN码就会导致广告投放受限
+
+[Google Admob结款遇阻，开发者如何应对](https://www.jianshu.com/p/12db7381433c)
      

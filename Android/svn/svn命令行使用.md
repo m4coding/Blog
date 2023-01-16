@@ -16,3 +16,7 @@
 4、svn info
 
     查看文件详细信息
+    
+## depth 深度控制
+
+[svn下载目录深度控制](http://bjbook.net/svn_depth.html)

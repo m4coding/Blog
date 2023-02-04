@@ -35,4 +35,6 @@
 由于付款地址未正确，所以PIN码未能正常发出，超过一定时候后未验证PIN码就会导致广告投放受限
 
 [Google Admob结款遇阻，开发者如何应对](https://www.jianshu.com/p/12db7381433c)
+
+收到PIN码后在google adsense中的收款-验证检查中输入PIN就可以完成地址验证了
      

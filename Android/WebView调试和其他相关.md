@@ -14,6 +14,10 @@
 
     DevTools可以在Elements选项tab查看对应ui的元素、Sources选项tab查看对应的源码
 
+# WebView缓存相关
+
+[Android WebView缓存机制和性能优化](https://juejin.cn/post/6844903934004297736)
+
 ## 参考
 
 [android 调试webView中的Html](https://juejin.cn/post/6844903936902561799)

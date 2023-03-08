@@ -8,13 +8,13 @@
 
 2、7.0以上，外部文件分享处理问题
 
-  E/DatabaseUtils(22545): Writing exception to parcel
-  E/DatabaseUtils(22545): java.lang.SecurityException: Permission Denial: reading androidx.core.content.FileProvider uri content://com.example.app.provider/external_files/Android/data/com.example.app/files/test.json from pid=22857, uid=1000 requires the provider be exported, or grantUriPermission()
-  E/DatabaseUtils(22545): 	at android.content.ContentProvider.enforceReadPermissionInner(ContentProvider.java:729)
-  E/DatabaseUtils(22545): 	at android.content.ContentProvider$Transport.enforceReadPermission(ContentProvider.java:602)
-  E/DatabaseUtils(22545): 	at android.content.ContentProvider$Transport.query(ContentProvider.java:231)
-  E/DatabaseUtils(22545): 	at android.content.ContentProviderNative.onTransact(ContentProviderNative.java:104)
-  E/DatabaseUtils(22545): 	at android.os.Binder.execTransactInternal(Binder.java:1021)
-  E/DatabaseUtils(22545): 	at android.os.Binder.execTransact(Binder.java:994)
+    E/DatabaseUtils(22545): Writing exception to parcel
+    E/DatabaseUtils(22545): java.lang.SecurityException: Permission Denial: reading androidx.core.content.FileProvider uri content://com.example.app.provider/external_files/Android/data/com.example.app/files/test.json from pid=22857, uid=1000 requires the provider be exported, or grantUriPermission()
+    E/DatabaseUtils(22545): 	at android.content.ContentProvider.enforceReadPermissionInner(ContentProvider.java:729)
+    E/DatabaseUtils(22545): 	at android.content.ContentProvider$Transport.enforceReadPermission(ContentProvider.java:602)
+    E/DatabaseUtils(22545): 	at android.content.ContentProvider$Transport.query(ContentProvider.java:231)
+    E/DatabaseUtils(22545): 	at android.content.ContentProviderNative.onTransact(ContentProviderNative.java:104)
+    E/DatabaseUtils(22545): 	at android.os.Binder.execTransactInternal(Binder.java:1021)
+    E/DatabaseUtils(22545): 	at android.os.Binder.execTransact(Binder.java:994)
   
 注意下是否已给权限 Intent.FLAG_GRANT_READ_URI_PERMISSION和Intent.FLAG_GRANT_WRITE_URI_PERMISSION

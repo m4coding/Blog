@@ -8,4 +8,14 @@
 
 [Android 未使用编译器堆栈保护技术解决方法](https://www.cnblogs.com/zhouyong0330/p/14277980.html)
 
+## 3.3.15 未使用地址空间随机化技术风险检测
+
+在使用NDK编译SO文件时，在Android.mk文件中增加以下参数LOCAL_CFLAGS := -fPIC
+
+如果不是用Android.mk编译，用的build.gradle里面配置的ndk，可以这样配置
+
+    ndk {
+        cFlags "-fPIC"
+    }
+
 

@@ -24,3 +24,5 @@
 [camille](https://github.com/zhengjim/camille)
 
 [PrivacySentry](https://github.com/allenymt/PrivacySentry)
+
+[Android 隐私合规检测](https://juejin.cn/post/7213642622074273849)

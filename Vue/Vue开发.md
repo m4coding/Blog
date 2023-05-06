@@ -24,3 +24,7 @@
         // 基本路径  配置静态资源为相对路径，确保dist中index.html能本地打开而不空白显示
         publicPath:"./"
     }
+    
+ ## 通过vscode来进行开发
+ 
+ [基于vscode的vue开发](https://blog.csdn.net/essity/article/details/103140494)

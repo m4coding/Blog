@@ -7,3 +7,5 @@
 [学生党 Google Play 剁手经验分享](https://sspai.com/post/45933)
 
 [Android GooglePay 填坑录](https://blog.51cto.com/zhaoyanjun/3815668?share_token=1afb739e-c30f-4fc9-a06a-aeae60b3d1cf&tt_from=copy_link&utm_source=copy_link&utm_medium=toutiao_android&utm_campaign=client_share)
+
+[Google AdSense电汇付款，填写招商银行一卡通收款信息](https://baiyunju.cc/5904)

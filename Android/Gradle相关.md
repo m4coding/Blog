@@ -8,6 +8,10 @@
 
     gradlew build --refresh-dependencies
 
+## 谁引入的包依赖查找
+
+    例如查找bugly是谁引入的
+    gradlew app:dependencyInsight --dependency com.tencent.bugly:crashreport --configuration releaseCompileClasspath
 
 ## .gradlew目录中添加init.gradle，解决库下载问题
 
